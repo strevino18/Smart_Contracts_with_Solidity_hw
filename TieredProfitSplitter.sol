@@ -22,15 +22,35 @@ contract TieredProfitSplitter {
         uint total;
         uint amount;
 
-        // @TODO: Calculate and transfer the distribution percentage
+        // Calculate and transfer the distribution percentage
         // Step 1: Set amount to equal `points` * the number of percentage points for this employee
+        
+        amount = points * 60;
+        
         // Step 2: Add the `amount` to `total` to keep a running total
+        
+        total = total + amount;
+        
         // Step 3: Transfer the `amount` to the employee
+        
+        employee_one.transfer(amount);
 
-        // @TODO: Repeat the previous steps for `employee_two` and `employee_three`
-        // Your code here!
+        // Repeat the previous steps for `employee_two` and `employee_three`
+        // employee_two transfer
+        
+        amount = points * 25;
+        total  = total + amount;
+        employee_two.transfer(amount);
+        
+        // employee_three transfer
+        
+        amount = points * 15;
+        total  = total + amount;
+        employee_three.transfer(amount);
+        
+        // CEO gets the remaining wei
 
-        employee_one.transfer(msg.value - total); // ceo gets the remaining wei
+        employee_one.transfer(msg.value - total); 
     }
 
     function() external payable {
